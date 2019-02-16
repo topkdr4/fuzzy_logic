@@ -29,4 +29,13 @@ public class SystemFunctions {
         private final Function<Double, Double> function;
     }
 
+
+    public double calc(double value) {
+        for (SystemHolder holder : system) {
+            if (holder.predicate.test(value))
+                return holder.function.apply(value);
+        }
+
+        throw new IllegalArgumentException("function not found for value: " + value);
+    }
 }

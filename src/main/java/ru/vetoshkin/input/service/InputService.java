@@ -24,8 +24,12 @@ public abstract class InputService<T extends Enum<T>> {
 
     protected abstract void init();
 
-    protected SystemFunctions getSystem(T key) {
-        return systemFunction.get(key);
+
+    public abstract T getValue(double value);
+
+
+    protected double getValue(T t, double value) {
+        return systemFunction.get(t).calc(value);
     }
 
 
