@@ -39,7 +39,7 @@ public class ChlorineService extends InputService<InputChlorine> {
     @Override
     public InputChlorine getValue(double value) {
         double acceptable = getValue(ACCEPTABLE, value);
-        double high       = getValue(InputChlorine.HIGH, value);
+        double high       = getValue(HIGH, value);
 
         int compare = Double.compare(acceptable, high);
 

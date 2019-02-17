@@ -39,19 +39,19 @@ public class InputData {
 
     public static InputData build() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Кол-во микроорганизмов:");
+        System.out.print("Кол-во микроорганизмов: ");
         double micro_ratio = scanner.nextDouble();
 
-        System.out.println("Остаточная концентрация хлорина:");
+        System.out.print("Остаточная концентрация хлорина: ");
         double cl_ratio = scanner.nextDouble();
 
-        System.out.println("Прозрачность воды:");
+        System.out.print("Прозрачность воды: ");
         double turbidity = scanner.nextDouble();
 
-        System.out.println("Скорость ленты конвейера:");
+        System.out.print("Скорость ленты конвейера: ");
         double speed = scanner.nextDouble();
 
-        System.out.println("Поток воды");
+        System.out.print("Поток воды: ");
         double water_f = scanner.nextDouble();
 
         return new InputData(micro_ratio, cl_ratio, turbidity, speed, water_f);
@@ -61,20 +61,20 @@ public class InputData {
     public static InputData generate() {
         ThreadLocalRandom random = ThreadLocalRandom.current();
 
-        System.out.println("Кол-во микроорганизмов:");
         double micro_ratio = random.nextDouble(0, 1000);
+        System.out.printf("Кол-во микроорганизмов: %f \n", micro_ratio);
 
-        System.out.println("Остаточная концентрация хлорина:");
         double cl_ratio = random.nextDouble(0, 1000);
+        System.out.printf("Остаточная концентрация хлорина: %f \n", cl_ratio);
 
-        System.out.println("Прозрачность воды:");
         double turbidity = random.nextDouble(0, 1000);
+        System.out.printf("Прозрачность воды: %f \n", turbidity);
 
-        System.out.println("Скорость ленты конвейера:");
         double speed = random.nextDouble(0, 1000);
+        System.out.printf("Скорость ленты конвейера: %f \n", speed);
 
-        System.out.println("Поток воды");
         double water_f = random.nextDouble(0, 1000);
+        System.out.printf("Поток воды: %f \n", water_f);
 
         return new InputData(micro_ratio, cl_ratio, turbidity, speed, water_f);
     }

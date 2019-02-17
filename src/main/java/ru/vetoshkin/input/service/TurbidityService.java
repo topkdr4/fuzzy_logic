@@ -1,5 +1,4 @@
 package ru.vetoshkin.input.service;
-import ru.vetoshkin.input.InputSpeed;
 import ru.vetoshkin.input.InputTurbidity;
 
 import static ru.vetoshkin.input.InputTurbidity.HIGH;
@@ -32,7 +31,7 @@ public class TurbidityService extends InputService<InputTurbidity> {
         highSystem.addFunction(value -> value <  500, getFunction(new Point(350, 0), new Point(500,  1)));
         highSystem.addFunction(value -> value >= 500, getFunction(new Point(500, 1), new Point(1000, 1)));
 
-        systemFunction.put(HIGH, lowSystem);
+        systemFunction.put(HIGH, highSystem);
     }
 
 
