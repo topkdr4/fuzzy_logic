@@ -15,6 +15,10 @@ public class Main {
         InputData inputData = InputData.build();
 
         FuzzyLogic logic = new FuzzyLogic();
+
+        System.out.println(Double.compare(1, 2));
+        System.out.println(Double.compare(1, 1));
+        System.out.println(Double.compare(2, 1));
     }
 
 

@@ -1,8 +1,9 @@
 package ru.vetoshkin.input.service;
 import lombok.AllArgsConstructor;
+import ru.vetoshkin.SystemFunctions;
 import ru.vetoshkin.input.InputParam;
+import ru.vetoshkin.input.InputTurbidity;
 
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -15,11 +16,10 @@ import java.util.function.Function;
  * Ветошкин А.В. РИС-16бзу
  * */
 public abstract class InputService<T extends InputParam> {
-    protected final Map<T, SystemFunctions> systemFunction;
+    protected final Map<InputParam, SystemFunctions> systemFunction = new ConcurrentHashMap<>();
 
 
     public InputService() {
-        systemFunction = new ConcurrentHashMap<>();
         init();
     }
 
@@ -27,11 +27,13 @@ public abstract class InputService<T extends InputParam> {
     protected abstract void init();
 
 
-    public abstract T getValue(double value);
-
-
     public double getValue(T t, double value) {
         return systemFunction.get(t).calc(value);
+    }
+
+
+    public InputParam getVal(InputParam t, double value) {
+        return new InputParam(t, value);
     }
 
 

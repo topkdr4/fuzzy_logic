@@ -1,13 +1,8 @@
 package ru.vetoshkin.input.service;
-import ru.vetoshkin.input.InputMicro;
+import ru.vetoshkin.SystemFunctions;
 import ru.vetoshkin.input.InputParam;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static ru.vetoshkin.input.InputMicro.ACCEPTABLE;
-import static ru.vetoshkin.input.InputMicro.HIGH;
-import static ru.vetoshkin.input.InputMicro.LOW;
+import static ru.vetoshkin.input.InputMicro.*;
 
 
 
@@ -16,10 +11,10 @@ import static ru.vetoshkin.input.InputMicro.LOW;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class MicroService extends InputService<InputParam> {
+public class InputMicroService<T extends InputParam> extends InputService<T> {
 
 
-    public MicroService() {
+    public InputMicroService() {
         super();
     }
 
@@ -48,20 +43,4 @@ public class MicroService extends InputService<InputParam> {
         systemFunction.put(HIGH, highSystem);
     }
 
-
-    @Override
-    public InputMicro getValue(double value) {
-        double low = getValue(LOW, value);
-        double acceptable = getValue(ACCEPTABLE, value);
-        double high = getValue(HIGH, value);
-
-        Map<Double, InputParam> data = new HashMap<>();
-        data.put(low, LOW);
-        data.put(acceptable, ACCEPTABLE);
-        data.put(high, HIGH);
-
-        double max = Math.max(low, Math.max(acceptable, high));
-
-        return new InputMicro(data.get(max), max);
-    }
 }

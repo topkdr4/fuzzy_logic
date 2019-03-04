@@ -1,6 +1,6 @@
 package ru.vetoshkin.input.service;
+import ru.vetoshkin.SystemFunctions;
 import ru.vetoshkin.input.InputParam;
-import ru.vetoshkin.input.InputWater;
 
 import static ru.vetoshkin.input.InputWater.HIGH;
 import static ru.vetoshkin.input.InputWater.NOT_HIGH;
@@ -12,9 +12,9 @@ import static ru.vetoshkin.input.InputWater.NOT_HIGH;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class WaterService extends InputService<InputParam> {
+public class InputWaterService<T extends InputParam> extends InputService<T> {
 
-    public WaterService() {
+    public InputWaterService() {
         super();
     }
 
@@ -35,17 +35,4 @@ public class WaterService extends InputService<InputParam> {
         systemFunction.put(HIGH, highSystem);
     }
 
-
-    @Override
-    public InputWater getValue(double value) {
-        double noHigh = getValue(NOT_HIGH, value);
-        double high   = getValue(HIGH, value);
-
-        int compare = Double.compare(noHigh, high);
-
-        if (compare >= 0)
-            return new InputWater(NOT_HIGH, noHigh);
-
-        return new InputWater(HIGH, high);
-    }
 }

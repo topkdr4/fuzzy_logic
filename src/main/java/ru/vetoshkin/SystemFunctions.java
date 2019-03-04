@@ -1,4 +1,4 @@
-package ru.vetoshkin.input.service;
+package ru.vetoshkin;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;

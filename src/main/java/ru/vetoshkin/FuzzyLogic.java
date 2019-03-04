@@ -1,8 +1,5 @@
 package ru.vetoshkin;
-import ru.vetoshkin.input.InputData;
-import ru.vetoshkin.input.InputMicro;
-import ru.vetoshkin.input.InputTurbidity;
-import ru.vetoshkin.input.InputWater;
+import ru.vetoshkin.input.*;
 import ru.vetoshkin.input.service.*;
 
 
@@ -13,11 +10,15 @@ import ru.vetoshkin.input.service.*;
  * Ветошкин А.В. РИС-16бзу
  * */
 public class FuzzyLogic {
-    private static final ChlorineService chlorineService = new ChlorineService();
-    private static final TurbidityService turbidityService = new TurbidityService();
-    private static final MicroService microService = new MicroService();
-    private static final WaterService waterService = new WaterService();
-    private static final SpeedService speedService = new SpeedService();
+    private static final InputService<InputChlorine> INPUT_CHLORINE_SERVICE = new InputChlorineService<>();
+    private static final InputService<InputTurbidity> INPUT_TURBIDITY_SERVICE = new InputTurbidityService<>();
+    private static final InputService<InputMicro> INPUT_MICRO_SERVICE = new InputMicroService<>();
+    private static final InputService<InputWater> INPUT_WATER_SERVICE = new InputWaterService<>();
+    private static final InputService<InputSpeed> INPUT_SPEED_SERVICE = new InputSpeedService<>();
+
+    //*******************************************
+
+
 
 
     /**
@@ -26,24 +27,20 @@ public class FuzzyLogic {
      * Water_f_var = Положительное большое.
      */
     public void rule1(InputData inputData) {
-        InputTurbidity turbidityData = turbidityService.getValue(inputData.getTurbidity());
-        InputWater waterData = waterService.getValue(inputData.getWater_f());
+        InputParam turbidity = INPUT_TURBIDITY_SERVICE.getVal(InputTurbidity.LOW, inputData.getTurbidity());
+        InputParam water = INPUT_WATER_SERVICE.getVal(InputWater.NOT_HIGH, inputData.getWater_f());
 
-        double turbidityValue = turbidityService.getValue(InputTurbidity.LOW, inputData.getTurbidity());
-        double waterValue = waterService.getValue(InputWater.NOT_HIGH, inputData.getWater_f());
-
-        double temp = AND(turbidityValue, waterValue);
+        InputParam temp = AND(turbidity, water);
     }
 
 
     public void rule2(InputData inputData) {
-        InputTurbidity turbidityData = turbidityService.getValue(inputData.getTurbidity());
-        InputWater waterData = waterService.getValue(inputData.getWater_f());
+
     }
 
 
     public void rule3(InputData inputData) {
-        InputMicro microData = microService.getValue(inputData.getMicro_ratio());
+
     }
 
 
@@ -58,11 +55,29 @@ public class FuzzyLogic {
     }
 
 
+    private static InputParam AND(InputParam a, InputParam b) {
+        int compare = a.compareTo(b);
+        if (compare <= 0)
+            return a;
+
+        return b;
+    }
+
+
     /**
      * Операция объединения
      */
     private static double OR(double a, double b) {
         return Math.max(a, b);
+    }
+
+
+    private static InputParam OR(InputParam a, InputParam b) {
+        int compare = a.compareTo(b);
+        if (compare < 0)
+            return a;
+
+        return b;
     }
 
 
