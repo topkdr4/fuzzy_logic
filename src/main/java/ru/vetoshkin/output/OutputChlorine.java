@@ -1,13 +1,19 @@
 package ru.vetoshkin.output;
+import ru.vetoshkin.Param;
+
+
+
+
+
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class OutputChlorine extends OutputParam {
-    public static OutputParam NEGATIVE = new OutputParam("Отрицательное", 0);
-    public static OutputParam POSITIVE = new OutputParam("Положительное", 0.5);
-    public static OutputParam SUPER_POSITIVE = new OutputParam("Положительное большое", 1);
+public class OutputChlorine extends Param {
+    public static final Param NEGATIVE = new Param("Отрицательное", 0);
+    public static final Param POSITIVE = new Param("Положительное", 0.5);
+    public static final Param SUPER_POSITIVE = new Param("Положительное большое", 1);
 
-    public OutputChlorine(OutputParam state, double value) {
+    public OutputChlorine(Param state, double value) {
         super(state, value);
     }
 }

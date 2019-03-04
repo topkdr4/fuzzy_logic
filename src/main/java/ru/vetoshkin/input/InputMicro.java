@@ -1,14 +1,20 @@
 package ru.vetoshkin.input;
+import ru.vetoshkin.Param;
+
+
+
+
+
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class InputMicro extends InputParam {
-    public static InputParam LOW = new InputParam("Низкое", 0);
-    public static InputParam ACCEPTABLE = new InputParam("Приемлемое", 0.5);
-    public static InputParam HIGH = new InputParam("Высокое", 1);
+public class InputMicro extends Param {
+    public static Param LOW = new Param("Низкое", 0);
+    public static Param ACCEPTABLE = new Param("Приемлемое", 0.5);
+    public static Param HIGH = new Param("Высокое", 1);
 
 
-    public InputMicro(InputParam state, double value) {
+    public InputMicro(Param state, double value) {
         super(state, value);
     }
 }

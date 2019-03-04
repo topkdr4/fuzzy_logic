@@ -1,13 +1,19 @@
 package ru.vetoshkin.input;
+import ru.vetoshkin.Param;
+
+
+
+
+
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class InputSpeed extends InputParam {
-    public static InputParam NOT_HIGH = new InputParam("НЕ высокое", 0);
-    public static InputParam HIGH = new InputParam("Высокое", 1);
+public class InputSpeed extends Param {
+    public static Param NOT_HIGH = new Param("НЕ высокое", 0);
+    public static Param HIGH = new Param("Высокое", 1);
 
 
-    public InputSpeed(InputParam state, double value) {
+    public InputSpeed(Param state, double value) {
         super(state, value);
     }
 }

@@ -1,14 +1,20 @@
 package ru.vetoshkin.output;
+import ru.vetoshkin.Param;
+
+
+
+
+
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class OutputWater extends OutputParam {
-    public static OutputParam NEGATIVE = new OutputParam("Отрицательное", 0);
-    public static OutputParam POSITIVE = new OutputParam("Положительное", 0.5);
-    public static OutputParam SUPER_POSITIVE = new OutputParam("Положительное большое", 1);
+public class OutputWater extends Param {
+    public static final Param NEGATIVE = new Param("Отрицательное", 0);
+    public static final Param POSITIVE = new Param("Положительное", 0.5);
+    public static final Param SUPER_POSITIVE = new Param("Положительное большое", 1);
 
 
-    public OutputWater(OutputParam state, double value) {
+    public OutputWater(Param state, double value) {
         super(state, value);
     }
 }

@@ -1,13 +1,19 @@
 package ru.vetoshkin.input;
+import ru.vetoshkin.Param;
+
+
+
+
+
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class InputWater extends InputParam {
-    public static final InputParam NOT_HIGH = new InputParam("НЕ высокое", 0);
-    public static final InputParam HIGH = new InputParam("Высокое", 1);
+public class InputWater extends Param {
+    public static final Param NOT_HIGH = new Param("НЕ высокое", 0);
+    public static final Param HIGH = new Param("Высокое", 1);
 
 
-    public InputWater(InputParam state, double value) {
+    public InputWater(Param state, double value) {
         super(state, value);
     }
 }

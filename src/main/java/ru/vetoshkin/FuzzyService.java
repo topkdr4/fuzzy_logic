@@ -1,8 +1,5 @@
-package ru.vetoshkin.input.service;
+package ru.vetoshkin;
 import lombok.AllArgsConstructor;
-import ru.vetoshkin.SystemFunctions;
-import ru.vetoshkin.input.InputParam;
-import ru.vetoshkin.input.InputTurbidity;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,11 +12,11 @@ import java.util.function.Function;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public abstract class InputService<T extends InputParam> {
-    protected final Map<InputParam, SystemFunctions> systemFunction = new ConcurrentHashMap<>();
+public abstract class FuzzyService {
+    private final Map<Param, SystemFunctions> systemFunction = new ConcurrentHashMap<>();
 
 
-    public InputService() {
+    protected FuzzyService() {
         init();
     }
 
@@ -27,13 +24,18 @@ public abstract class InputService<T extends InputParam> {
     protected abstract void init();
 
 
-    public double getValue(T t, double value) {
+    protected void putFunction(Param key, SystemFunctions value) {
+        this.systemFunction.put(key, value);
+    }
+
+
+    public double getValue(Param t, double value) {
         return systemFunction.get(t).calc(value);
     }
 
 
-    public InputParam getVal(InputParam t, double value) {
-        return new InputParam(t, value);
+    public Param getVal(Param t, double value) {
+        return new Param(t, value);
     }
 
 
@@ -50,5 +52,4 @@ public abstract class InputService<T extends InputParam> {
         private final double x;
         private final double y;
     }
-
 }

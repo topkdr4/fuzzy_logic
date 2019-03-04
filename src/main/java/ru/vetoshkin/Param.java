@@ -1,4 +1,4 @@
-package ru.vetoshkin.input;
+package ru.vetoshkin;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,23 +9,22 @@ import lombok.Getter;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
+@Getter
 @AllArgsConstructor
-public class InputParam implements Comparable<InputParam> {
+public class Param implements Comparable<Param> {
     protected final String count;
-    @Getter
     protected final double value;
-    @Getter
-    protected final InputParam state;
+    protected final Param state;
 
 
-    protected InputParam(String count, double value) {
+    public Param(String count, double value) {
         this.count = count;
         this.value = value;
         this.state = this;
     }
 
 
-    public InputParam(InputParam state, double value) {
+    public Param(Param state, double value) {
         this.count = state.count;
         this.state = state;
         this.value = value;
@@ -33,7 +32,7 @@ public class InputParam implements Comparable<InputParam> {
 
 
     @Override
-    public int compareTo(InputParam o) {
+    public int compareTo(Param o) {
         return Double.compare(this.value, o.value);
     }
 }
