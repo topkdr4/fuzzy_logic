@@ -1,4 +1,5 @@
 package ru.vetoshkin.input.service;
+import ru.vetoshkin.input.InputParam;
 import ru.vetoshkin.input.InputWater;
 
 import static ru.vetoshkin.input.InputWater.HIGH;
@@ -11,10 +12,10 @@ import static ru.vetoshkin.input.InputWater.NOT_HIGH;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class WaterService extends InputService<InputWater> {
+public class WaterService extends InputService<InputParam> {
 
     public WaterService() {
-        super(InputWater.class);
+        super();
     }
 
 
@@ -42,9 +43,9 @@ public class WaterService extends InputService<InputWater> {
 
         int compare = Double.compare(noHigh, high);
 
-        if (compare == 0)
-            return NOT_HIGH;
+        if (compare >= 0)
+            return new InputWater(NOT_HIGH, noHigh);
 
-        return compare > 0 ? NOT_HIGH : HIGH;
+        return new InputWater(HIGH, high);
     }
 }
