@@ -52,4 +52,47 @@ public abstract class FuzzyService {
         private final double x;
         private final double y;
     }
+
+
+    //******************************************************************
+
+
+    /**
+     * Оператор пересечния
+     */
+    public static Param AND(Param a, Param b) {
+        int compare = a.compareTo(b);
+        if (compare <= 0)
+            return a;
+
+        return b;
+    }
+
+
+    /**
+     * Операция объединения
+     */
+    public static Param OR(Param a, Param b) {
+        int compare = a.compareTo(b);
+        if (compare < 0)
+            return a;
+
+        return b;
+    }
+
+
+    /**
+     * Отрицания
+     */
+    public static double NOT(double a) {
+        return 1d - a;
+    }
+
+
+    /**
+     * Степень истенности записывается как µ(A)
+     */
+    private static <T> T u(T t) {
+        throw new UnsupportedOperationException();
+    }
 }

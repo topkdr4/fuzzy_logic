@@ -1,5 +1,6 @@
 package ru.vetoshkin.output.service;
-import ru.vetoshkin.FuzzyService;
+import ru.vetoshkin.FuzzyOutputService;
+import ru.vetoshkin.Param;
 
 
 
@@ -8,10 +9,15 @@ import ru.vetoshkin.FuzzyService;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class OutputChlorineService extends FuzzyService {
+public class OutputChlorineService extends FuzzyOutputService {
     @Override
     protected void init() {
 
     }
 
+
+    @Override
+    public void cutting(Param param, double value) {
+
+    }
 }

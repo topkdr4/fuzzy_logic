@@ -1,10 +1,13 @@
 package ru.vetoshkin;
-import ru.vetoshkin.input.*;
+import ru.vetoshkin.input.InputData;
+import ru.vetoshkin.input.InputTurbidity;
+import ru.vetoshkin.input.InputWater;
 import ru.vetoshkin.input.service.*;
-import ru.vetoshkin.output.OutputWater;
 import ru.vetoshkin.output.service.OutputChlorineService;
 import ru.vetoshkin.output.service.OutputSpeedService;
 import ru.vetoshkin.output.service.OutputWaterService;
+
+import static ru.vetoshkin.FuzzyService.AND;
 
 
 
@@ -22,9 +25,9 @@ public class FuzzyLogic {
 
     //*******************************************
 
-    private static final FuzzyService OUTPUT_WATER_SERVICE = new OutputWaterService();
-    private static final FuzzyService OUTPUT_CHLOR_SERVICE = new OutputChlorineService();
-    private static final FuzzyService OUTPUT_SPEED_SERVICE = new OutputSpeedService();
+    private static final FuzzyOutputService OUTPUT_WATER_SERVICE = new OutputWaterService();
+    private static final FuzzyOutputService OUTPUT_CHLOR_SERVICE = new OutputChlorineService();
+    private static final FuzzyOutputService OUTPUT_SPEED_SERVICE = new OutputSpeedService();
 
 
     /**
@@ -37,6 +40,7 @@ public class FuzzyLogic {
         Param water = INPUT_WATER_SERVICE.getVal(InputWater.NOT_HIGH, inputData.getWater_f());
 
         Param temp = AND(turbidity, water);
+        OUTPUT_WATER_SERVICE.defuzzification(temp.value);
     }
 
 
@@ -49,58 +53,6 @@ public class FuzzyLogic {
 
     }
 
-
-    //*******************************************************************************************************
-
-
-    /**
-     * Оператор пересечния
-     */
-    private static double AND(double a, double b) {
-        return Math.min(a, b);
-    }
-
-
-    private static Param AND(Param a, Param b) {
-        int compare = a.compareTo(b);
-        if (compare <= 0)
-            return a;
-
-        return b;
-    }
-
-
-    /**
-     * Операция объединения
-     */
-    private static double OR(double a, double b) {
-        return Math.max(a, b);
-    }
-
-
-    private static Param OR(Param a, Param b) {
-        int compare = a.compareTo(b);
-        if (compare < 0)
-            return a;
-
-        return b;
-    }
-
-
-    /**
-     * Отрицания
-     */
-    private static double NOT(double a) {
-        return 1d - a;
-    }
-
-
-    /**
-     * Степень истенности записывается как µ(A)
-     */
-    private static <T> T u(T t) {
-        throw new UnsupportedOperationException();
-    }
 
 }
 
