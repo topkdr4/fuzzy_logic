@@ -1,18 +1,13 @@
 package ru.vetoshkin.input;
-import lombok.AllArgsConstructor;
-
-
-
-
-
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-@AllArgsConstructor
-public enum InputWater {
-    NOT_HIGH("НЕ высокое"),
-    HIGH("Высокое")
-    ;
+public class InputWater extends InputParam {
+    public static InputParam NOT_HIGH = new InputParam("НЕ высокое", 0);
+    public static InputParam HIGH = new InputParam("Высокое", 1);
 
-    private final String count;
+
+    public InputWater(InputParam state, double value) {
+        super(state, value);
+    }
 }

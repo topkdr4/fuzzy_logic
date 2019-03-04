@@ -1,5 +1,6 @@
 package ru.vetoshkin.input.service;
 import ru.vetoshkin.input.InputMicro;
+import ru.vetoshkin.input.InputParam;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +16,11 @@ import static ru.vetoshkin.input.InputMicro.LOW;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class MicroService extends InputService<InputMicro> {
+public class MicroService extends InputService<InputParam> {
 
 
     public MicroService() {
-        super(InputMicro.class);
+        super();
     }
 
 
@@ -54,13 +55,13 @@ public class MicroService extends InputService<InputMicro> {
         double acceptable = getValue(ACCEPTABLE, value);
         double high = getValue(HIGH, value);
 
-        Map<Double, InputMicro> data = new HashMap<>();
+        Map<Double, InputParam> data = new HashMap<>();
         data.put(low, LOW);
         data.put(acceptable, ACCEPTABLE);
         data.put(high, HIGH);
 
         double max = Math.max(low, Math.max(acceptable, high));
 
-        return data.get(max);
+        return new InputMicro(data.get(max), max);
     }
 }

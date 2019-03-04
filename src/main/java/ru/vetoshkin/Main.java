@@ -1,6 +1,5 @@
 package ru.vetoshkin;
 import ru.vetoshkin.input.InputData;
-import ru.vetoshkin.input.service.TurbidityService;
 
 
 
@@ -16,7 +15,6 @@ public class Main {
         InputData inputData = InputData.build();
 
         FuzzyLogic logic = new FuzzyLogic();
-        logic.badWash(inputData);
     }
 
 

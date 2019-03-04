@@ -1,20 +1,15 @@
 package ru.vetoshkin.input;
-import lombok.AllArgsConstructor;
-
-
-
-
-
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-@AllArgsConstructor
-public enum InputMicro {
-    LOW("Низкое"),
-    ACCEPTABLE("Приемлемое"),
-    HIGH("Высокое")
-    ;
+public class InputMicro extends InputParam {
+    public static InputParam LOW = new InputParam("Низкое", 0);
+    public static InputParam ACCEPTABLE = new InputParam("Приемлемое", 0.5);
+    public static InputParam HIGH = new InputParam("Высокое", 1);
 
-    private final String count;
+
+    public InputMicro(InputParam state, double value) {
+        super(state, value);
+    }
 }
 

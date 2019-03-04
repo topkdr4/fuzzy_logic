@@ -1,5 +1,6 @@
 package ru.vetoshkin.input.service;
 import ru.vetoshkin.input.InputChlorine;
+import ru.vetoshkin.input.InputParam;
 
 import static ru.vetoshkin.input.InputChlorine.ACCEPTABLE;
 import static ru.vetoshkin.input.InputChlorine.HIGH;
@@ -11,11 +12,11 @@ import static ru.vetoshkin.input.InputChlorine.HIGH;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class ChlorineService extends InputService<InputChlorine> {
+public class ChlorineService extends InputService<InputParam> {
 
 
     public ChlorineService() {
-        super(InputChlorine.class);
+        super();
     }
 
 
@@ -43,10 +44,10 @@ public class ChlorineService extends InputService<InputChlorine> {
 
         int compare = Double.compare(acceptable, high);
 
-        if (compare == 0)
-            return ACCEPTABLE;
+        if (compare >= 0)
+            return new InputChlorine(ACCEPTABLE, acceptable);
 
-        return  compare > 0 ? ACCEPTABLE : HIGH;
+        return new InputChlorine(HIGH, high);
     }
 
 }

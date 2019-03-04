@@ -12,7 +12,7 @@ import ru.vetoshkin.input.service.*;
 public class FuzzyLogic {
     private static final ChlorineService chlorineService   = new ChlorineService();
     private static final TurbidityService turbidityService = new TurbidityService();
-    private static final MicroService mictoService = new MicroService();
+    private static final MicroService microService = new MicroService();
     private static final WaterService waterService = new WaterService();
     private static final SpeedService speedService = new SpeedService();
 
@@ -52,7 +52,7 @@ public class FuzzyLogic {
 
 
     public void rule3(InputData inputData) {
-        InputMicro microData = mictoService.getValue(inputData.getMicro_ratio());
+        InputMicro microData = microService.getValue(inputData.getMicro_ratio());
 
         if (microData != InputMicro.HIGH)
             return;

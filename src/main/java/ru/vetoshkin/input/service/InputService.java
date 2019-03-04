@@ -1,8 +1,10 @@
 package ru.vetoshkin.input.service;
 import lombok.AllArgsConstructor;
+import ru.vetoshkin.input.InputParam;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 
@@ -12,12 +14,12 @@ import java.util.function.Function;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public abstract class InputService<T extends Enum<T>> {
+public abstract class InputService<T extends InputParam> {
     protected final Map<T, SystemFunctions> systemFunction;
 
 
-    public InputService(Class<T> clazz) {
-        systemFunction = new EnumMap<>(clazz);
+    public InputService() {
+        systemFunction = new ConcurrentHashMap<>();
         init();
     }
 

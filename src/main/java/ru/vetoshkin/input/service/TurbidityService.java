@@ -1,4 +1,5 @@
 package ru.vetoshkin.input.service;
+import ru.vetoshkin.input.InputParam;
 import ru.vetoshkin.input.InputTurbidity;
 
 import static ru.vetoshkin.input.InputTurbidity.HIGH;
@@ -11,10 +12,10 @@ import static ru.vetoshkin.input.InputTurbidity.LOW;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class TurbidityService extends InputService<InputTurbidity> {
+public class TurbidityService extends InputService<InputParam> {
 
     public TurbidityService() {
-        super(InputTurbidity.class);
+        super();
     }
 
 
@@ -37,14 +38,14 @@ public class TurbidityService extends InputService<InputTurbidity> {
 
     @Override
     public InputTurbidity getValue(double value) {
-        double low = getValue(LOW, value);
+        double low  = getValue(LOW, value);
         double high = getValue(HIGH, value);
 
         int compare = Double.compare(low, high);
 
-        if (compare == 0)
-            return LOW;
+        if (compare >= 0)
+            return new InputTurbidity(LOW, value);
 
-        return compare > 0 ? LOW : HIGH;
+        return new InputTurbidity(HIGH, value);
     }
 }

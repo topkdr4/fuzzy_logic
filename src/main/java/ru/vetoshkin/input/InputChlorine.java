@@ -1,18 +1,13 @@
 package ru.vetoshkin.input;
-import lombok.AllArgsConstructor;
-
-
-
-
-
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-@AllArgsConstructor
-public enum InputChlorine {
-    ACCEPTABLE("Приемлемое"),
-    HIGH("Высокое")
-    ;
+public class InputChlorine extends InputParam {
+    public static final InputParam ACCEPTABLE = new InputParam("Приемлемое", 0);
+    public static final InputParam HIGH = new InputParam("Высокое", 1);
 
-    private final String count;
+
+    public InputChlorine(InputParam state, double value) {
+        super(state, value);
+    }
 }

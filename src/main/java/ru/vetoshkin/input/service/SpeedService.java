@@ -1,4 +1,5 @@
 package ru.vetoshkin.input.service;
+import ru.vetoshkin.input.InputParam;
 import ru.vetoshkin.input.InputSpeed;
 
 import static ru.vetoshkin.input.InputSpeed.HIGH;
@@ -11,10 +12,10 @@ import static ru.vetoshkin.input.InputSpeed.NOT_HIGH;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-public class SpeedService extends InputService<InputSpeed> {
+public class SpeedService extends InputService<InputParam> {
 
     public SpeedService() {
-        super(InputSpeed.class);
+        super();
     }
 
 
@@ -42,9 +43,9 @@ public class SpeedService extends InputService<InputSpeed> {
 
         int compare = Double.compare(notHigh, high);
 
-        if (compare == 0)
-            return NOT_HIGH;
+        if (compare >= 0)
+            return new InputSpeed(NOT_HIGH, notHigh);
 
-        return compare > 0 ? NOT_HIGH : HIGH;
+        return new InputSpeed(HIGH, high);
     }
 }

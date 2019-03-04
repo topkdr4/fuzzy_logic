@@ -1,18 +1,13 @@
 package ru.vetoshkin.input;
-import lombok.AllArgsConstructor;
-
-
-
-
-
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-@AllArgsConstructor
-public enum InputTurbidity {
-    LOW("Низкое"),
-    HIGH("Высокое")
-    ;
+public class InputTurbidity extends InputParam {
+    public static final InputParam LOW  = new InputParam("Низкое", 0);
+    public static final InputParam HIGH = new InputParam("Высокое", 1);
 
-    private final String count;
+
+    public InputTurbidity(InputParam state, double value) {
+        super(state.count, value, state);
+    }
 }
