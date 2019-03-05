@@ -3,6 +3,7 @@ import ru.vetoshkin.input.InputData;
 import ru.vetoshkin.input.InputTurbidity;
 import ru.vetoshkin.input.InputWater;
 import ru.vetoshkin.input.service.*;
+import ru.vetoshkin.output.OutputWater;
 import ru.vetoshkin.output.service.OutputChlorineService;
 import ru.vetoshkin.output.service.OutputSpeedService;
 import ru.vetoshkin.output.service.OutputWaterService;
@@ -40,7 +41,8 @@ public class FuzzyLogic {
         Param water = INPUT_WATER_SERVICE.getVal(InputWater.NOT_HIGH, inputData.getWater_f());
 
         Param temp = AND(turbidity, water);
-        OUTPUT_WATER_SERVICE.defuzzification(temp.value);
+        System.out.println(temp.value);
+        OUTPUT_WATER_SERVICE.cutting(OutputWater.SUPER_POSITIVE, temp.value);
     }
 
 

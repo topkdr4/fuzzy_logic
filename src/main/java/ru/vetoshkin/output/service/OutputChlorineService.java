@@ -13,22 +13,22 @@ public class OutputChlorineService extends FuzzyOutputService {
     @Override
     public void init() {
         SystemFunctions negativeSystem = new SystemFunctions();
-        negativeSystem.addFunction(value -> value <= -20, getFunction(new Point(-50, 0), new Point(-20, 1)));
-        negativeSystem.addFunction(value -> value >  -20, getFunction(new Point(-20, 1), new Point(10,  0)));
+        negativeSystem.addFunction(value -> value <= -20, new Line(new Point(-50, 0), new Point(-20, 1)));
+        negativeSystem.addFunction(value -> value >  -20, new Line(new Point(-20, 1), new Point(10,  0)));
 
         putFunction(OutputChlorine.NEGATIVE, negativeSystem);
 
 
         SystemFunctions positiveSystem = new SystemFunctions();
-        positiveSystem.addFunction(value -> value <= 20, getFunction(new Point(-10, 0), new Point(20, 1)));
-        positiveSystem.addFunction(value -> value >  20, getFunction(new Point(20,  1), new Point(50, 0)));
+        positiveSystem.addFunction(value -> value <= 20, new Line(new Point(-10, 0), new Point(20, 1)));
+        positiveSystem.addFunction(value -> value >  20, new Line(new Point(20,  1), new Point(50, 0)));
 
         putFunction(OutputChlorine.POSITIVE, positiveSystem);
 
 
         SystemFunctions superPositiveSystem = new SystemFunctions();
-        superPositiveSystem.addFunction(value -> value <= 60, getFunction(new Point(30, 0), new Point(60, 1)));
-        superPositiveSystem.addFunction(value -> value > 60,  getFunction(new Point(60, 1), new Point(90, 0)));
+        superPositiveSystem.addFunction(value -> value <= 60, new Line(new Point(30, 0), new Point(60, 1)));
+        superPositiveSystem.addFunction(value -> value > 60,  new Line(new Point(60, 1), new Point(90, 0)));
 
         putFunction(OutputChlorine.SUPER_POSITIVE, superPositiveSystem);
     }

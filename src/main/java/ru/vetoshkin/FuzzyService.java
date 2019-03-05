@@ -1,5 +1,6 @@
 package ru.vetoshkin;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,28 +30,70 @@ public abstract class FuzzyService {
     }
 
 
+    protected SystemFunctions getSystem(Param param) {
+        return systemFunction.get(param);
+    }
+
+
     public double getValue(Param t, double value) {
         return systemFunction.get(t).calc(value);
     }
 
 
     public Param getVal(Param t, double value) {
-        return new Param(t, value);
+        return new Param(t, getValue(t, value));
     }
 
 
     protected static Function<Double, Double> getFunction(Point pointA, Point pointB) {
-        double k = (pointB.y - pointA.y) / (pointB.x - pointA.x);
-        double b = (pointB.x * pointA.y - pointA.x * pointB.y) / (pointB.x - pointA.x);
-
-        return (value) -> k * value + b;
+        return new Line(pointA, pointB).getFunction();
     }
 
 
+    @Getter
     @AllArgsConstructor
     protected static class Point {
         private final double x;
         private final double y;
+
+
+        @Override
+        public String toString() {
+            return "Point{" +
+                    "x=" + x +
+                    ", y=" + y +
+                    '}';
+        }
+    }
+
+
+    protected static class Line {
+        private final Point pointA;
+        private final Point pointB;
+
+        private double k;
+        private double b;
+
+        public Line(Point pointA, Point pointB) {
+            this.pointA = pointA;
+            this.pointB = pointB;
+
+            this.k = (pointB.y - pointA.y) / (pointB.x - pointA.x);
+            this.b = (pointB.x * pointA.y - pointA.x * pointB.y) / (pointB.x - pointA.x);
+        }
+
+
+        public Function<Double, Double> getFunction() {
+            return (value) -> k * value + b;
+        }
+
+
+        public Point getCrossing(Line other) {
+            double x = (other.b - b) / (k - other.k);
+            double y = k * x + b;
+            return new Point(x, y);
+        }
+
     }
 
 
