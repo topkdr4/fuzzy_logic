@@ -21,7 +21,7 @@ public abstract class FuzzyService {
     }
 
 
-    protected abstract void init();
+    public abstract void init();
 
 
     protected void putFunction(Param key, SystemFunctions value) {

@@ -15,7 +15,7 @@ import static ru.vetoshkin.input.InputTurbidity.LOW;
 public class InputTurbidityService extends FuzzyService {
 
     @Override
-    protected void init() {
+    public void init() {
         SystemFunctions lowSystem = new SystemFunctions();
         lowSystem.addFunction(value -> value > 350, getFunction(new Point(350, 1), new Point(500, 0)));
         lowSystem.addFunction(value -> value <= 350, getFunction(new Point(0, 1), new Point(350, 1)));

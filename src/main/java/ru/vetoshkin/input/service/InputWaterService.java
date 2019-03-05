@@ -15,7 +15,7 @@ import static ru.vetoshkin.input.InputWater.NOT_HIGH;
 public class InputWaterService extends FuzzyService {
 
     @Override
-    protected void init() {
+    public void init() {
         SystemFunctions notHighSystem = new SystemFunctions();
         notHighSystem.addFunction(value -> value <= 800, getFunction(new Point(0,   1), new Point(800, 1)));
         notHighSystem.addFunction(value -> value >  800, getFunction(new Point(800, 1), new Point(1000, 0)));

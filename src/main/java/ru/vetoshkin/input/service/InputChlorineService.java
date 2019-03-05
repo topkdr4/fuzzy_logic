@@ -15,7 +15,7 @@ import static ru.vetoshkin.input.InputChlorine.HIGH;
 public class InputChlorineService extends FuzzyService {
 
     @Override
-    protected void init() {
+    public void init() {
         SystemFunctions acceptableSystem = new SystemFunctions();
         acceptableSystem.addFunction(value -> value <= 400, getFunction(new Point(0,   1), new Point(400, 1)));
         acceptableSystem.addFunction(value -> value > 400,  getFunction(new Point(400, 1), new Point(600, 0)));

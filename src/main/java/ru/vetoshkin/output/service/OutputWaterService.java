@@ -16,7 +16,7 @@ public class OutputWaterService extends FuzzyOutputService {
 
 
     @Override
-    protected void init() {
+    public void init() {
         SystemFunctions negativeSystem = new SystemFunctions();
         negativeSystem.addFunction(value -> value <= -20, getFunction(new Point(-50, 0), new Point(-20, 1)));
         negativeSystem.addFunction(value -> value >  -20, getFunction(new Point(-20, 1), new Point(10,  0)));

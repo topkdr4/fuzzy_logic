@@ -14,7 +14,7 @@ import static ru.vetoshkin.input.InputMicro.*;
 public class InputMicroService extends FuzzyService {
 
     @Override
-    protected void init() {
+    public void init() {
         SystemFunctions lowSystem = new SystemFunctions();
         lowSystem.addFunction(value -> value <= 350, getFunction(new Point(0,   1), new Point(350, 1)));
         lowSystem.addFunction(value -> value > 350,  getFunction(new Point(350, 1), new Point(500, 0)));
