@@ -124,8 +124,8 @@ public abstract class FuzzyService {
     /**
      * Отрицания
      */
-    public static double NOT(double a) {
-        return 1d - a;
+    public static Param NOT(Param a) {
+        return new Param(a, 1d - a.value);
     }
 
 
