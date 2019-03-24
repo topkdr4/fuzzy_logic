@@ -40,7 +40,7 @@ public class OutputWaterService extends FuzzyOutputService {
 
 
     @Override
-    public void cutting(Param param, double value) {
+    public SystemFunctions cutting(Param param, double value) {
         SystemFunctions system = getSystem(param);
         if (system.getSystem().size() != 2)
             throw new IllegalStateException("max 2 function");
@@ -58,7 +58,9 @@ public class OutputWaterService extends FuzzyOutputService {
             superTempSystem.addFunction(arg -> arg >= start.getX() && arg <= end.getX(), new Line(start, end));
             superTempSystem.addFunction(arg -> arg <= 90 && arg >= end.getX(), new Line(end, new Point(90, 0)));
 
-            System.out.println(superTempSystem.defuuzz(30, 90));
+            return superTempSystem;
         }
+
+        throw new IllegalArgumentException("unknown parameter");
     }
 }

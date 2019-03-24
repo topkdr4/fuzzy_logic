@@ -31,7 +31,7 @@ public class OutputSpeedService extends FuzzyOutputService {
 
 
     @Override
-    public void cutting(Param param, double value) {
-
+    public SystemFunctions cutting(Param param, double value) {
+        throw new IllegalArgumentException("unknown parameter");
     }
 }

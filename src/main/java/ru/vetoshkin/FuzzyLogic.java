@@ -42,7 +42,9 @@ public class FuzzyLogic {
 
         Param temp = AND(turbidity, water);
         System.out.println(temp.value);
-        OUTPUT_WATER_SERVICE.cutting(OutputWater.SUPER_POSITIVE, temp.value);
+        SystemFunctions systemFunctions = OUTPUT_WATER_SERVICE.cutting(OutputWater.SUPER_POSITIVE, temp.value);
+
+        System.out.println(systemFunctions.gravityCenter(30, 90));
     }
 
 

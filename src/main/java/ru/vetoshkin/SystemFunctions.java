@@ -70,7 +70,7 @@ public class SystemFunctions {
 
 
 
-    public double defuuzz(double from, double to) {
+    public double gravityCenter(double from, double to) {
         List<Double> a = new ArrayList<>();
         List<Double> b = new ArrayList<>();
 
