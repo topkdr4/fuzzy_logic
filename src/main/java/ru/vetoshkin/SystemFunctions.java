@@ -1,8 +1,10 @@
 package ru.vetoshkin;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -32,6 +34,7 @@ public class SystemFunctions {
 
 
 
+    @ToString
     @Getter
     @AllArgsConstructor
     public static class SystemHolder {
@@ -42,10 +45,42 @@ public class SystemFunctions {
 
     public double calc(double value) {
         for (SystemHolder holder : system) {
-            if (holder.predicate.test(value))
-                return holder.line.getFunction().apply(value);
+            if (holder.predicate.test(value)) {
+                double val = holder.line.getFunction().apply(value);
+                return val > 0 ? val : 0;
+            }
         }
 
-        throw new IllegalArgumentException("function not found for value: " + value);
+        return 0;
+    }
+
+
+
+    private static final double delta = 0.01;
+
+
+    private static double sum(List<Double> source) {
+        double result = 0;
+
+        for (Double val : source)
+            result += val;
+
+        return result;
+    }
+
+
+
+    public double defuuzz(double from, double to) {
+        List<Double> a = new ArrayList<>();
+        List<Double> b = new ArrayList<>();
+
+
+        for (double i = from; i <= to; i += delta) {
+            double data = calc(i);
+            a.add(data * i);
+            b.add(data);
+        }
+
+        return sum(a) / sum(b);
     }
 }

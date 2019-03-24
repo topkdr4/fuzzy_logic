@@ -1,6 +1,7 @@
 package ru.vetoshkin;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -67,6 +68,7 @@ public abstract class FuzzyService {
     }
 
 
+    @ToString
     protected static class Line {
         private final Point pointA;
         private final Point pointB;
