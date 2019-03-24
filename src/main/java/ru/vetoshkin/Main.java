@@ -16,6 +16,7 @@ public class Main {
 
         FuzzyLogic logic = new FuzzyLogic();
         logic.rule1(inputData);
+        logic.rule2(inputData);
     }
 
 

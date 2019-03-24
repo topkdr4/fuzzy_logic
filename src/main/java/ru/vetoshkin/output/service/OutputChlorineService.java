@@ -5,6 +5,9 @@ import ru.vetoshkin.SystemFunctions;
 import ru.vetoshkin.output.OutputChlorine;
 
 
+
+
+
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
@@ -36,6 +39,16 @@ public class OutputChlorineService extends FuzzyOutputService {
 
     @Override
     public SystemFunctions cutting(Param param, double value) {
+        Pair<Point, Point> points = getParams(param, value);
+
+        if (param == OutputChlorine.NEGATIVE) {
+            return SystemFunctions.addConstraints(points, new Pair<>(-50d, 10d));
+        } else if (param == OutputChlorine.POSITIVE) {
+            return SystemFunctions.addConstraints(points, new Pair<>(-10d, 50d));
+        } else if (param == OutputChlorine.SUPER_POSITIVE) {
+            return SystemFunctions.addConstraints(points, new Pair<>(30d, 90d));
+        }
+
         throw new IllegalArgumentException("unknown parameter");
     }
 }

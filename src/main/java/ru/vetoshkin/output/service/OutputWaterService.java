@@ -41,25 +41,16 @@ public class OutputWaterService extends FuzzyOutputService {
 
     @Override
     public SystemFunctions cutting(Param param, double value) {
-        SystemFunctions system = getSystem(param);
-        if (system.getSystem().size() != 2)
-            throw new IllegalStateException("max 2 function");
-
-        Line line = new Line(new Point(0, value), new Point(1, value));
-        System.out.println(line);
-
-        Point start = system.getSystem().get(0).getLine().getCrossing(line);
-        Point end   = system.getSystem().get(1).getLine().getCrossing(line);
-
+        Pair<Point, Point> points = getParams(param, value);
 
         if (param == OutputWater.SUPER_POSITIVE) {
-            SystemFunctions superTempSystem = new SystemFunctions();
-            superTempSystem.addFunction(arg -> arg >= 30 && arg <= start.getX(), new Line(new Point(30, 0), start));
-            superTempSystem.addFunction(arg -> arg >= start.getX() && arg <= end.getX(), new Line(start, end));
-            superTempSystem.addFunction(arg -> arg <= 90 && arg >= end.getX(), new Line(end, new Point(90, 0)));
-
-            return superTempSystem;
+            return SystemFunctions.addConstraints(points, new Pair<>(30d, 90d));
+        } else if (param == OutputWater.POSITIVE) {
+            return SystemFunctions.addConstraints(points, new Pair<>(-10d, 50d));
+        } else if (param == OutputWater.NEGATIVE) {
+            return SystemFunctions.addConstraints(points, new Pair<>(-50d, 10d));
         }
+
 
         throw new IllegalArgumentException("unknown parameter");
     }

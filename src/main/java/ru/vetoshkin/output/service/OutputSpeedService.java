@@ -32,6 +32,14 @@ public class OutputSpeedService extends FuzzyOutputService {
 
     @Override
     public SystemFunctions cutting(Param param, double value) {
+        Pair<Point, Point> points = getParams(param, value);
+
+        if (param == OutputSpeed.NEGATIVE) {
+            return SystemFunctions.addConstraints(points, new Pair<>(-50d, 10d));
+        } else if (param == OutputSpeed.POSITIVE) {
+            return SystemFunctions.addConstraints(points, new Pair<>(-10d, 50d));
+        }
+
         throw new IllegalArgumentException("unknown parameter");
     }
 }

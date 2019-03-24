@@ -46,11 +46,6 @@ public abstract class FuzzyService {
     }
 
 
-    protected static Function<Double, Double> getFunction(Point pointA, Point pointB) {
-        return new Line(pointA, pointB).getFunction();
-    }
-
-
     @Getter
     @AllArgsConstructor
     protected static class Point {

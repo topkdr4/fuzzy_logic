@@ -26,14 +26,6 @@ public class SystemFunctions {
     }
 
 
-    public SystemFunctions copy() {
-        SystemFunctions result = new SystemFunctions();
-        result.system.addAll(system);
-        return result;
-    }
-
-
-
     @ToString
     @Getter
     @AllArgsConstructor
@@ -82,5 +74,21 @@ public class SystemFunctions {
         }
 
         return sum(a) / sum(b);
+    }
+
+
+    public static SystemFunctions addConstraints(FuzzyOutputService.Pair<FuzzyService.Point, FuzzyService.Point> points, FuzzyOutputService.Pair<Double, Double> constraints) {
+        FuzzyService.Point start = points.getFirst();
+        FuzzyService.Point end   = points.getSecond();
+
+        double min = constraints.getFirst();
+        double max = constraints.getSecond();
+
+        SystemFunctions superTempSystem = new SystemFunctions();
+        superTempSystem.addFunction(arg -> arg >= min && arg <= start.getX(), new FuzzyService.Line(new FuzzyService.Point(min, 0), start));
+        superTempSystem.addFunction(arg -> arg >= start.getX() && arg <= end.getX(), new FuzzyService.Line(start, end));
+        superTempSystem.addFunction(arg -> arg <= max && arg >= end.getX(), new FuzzyService.Line(end, new FuzzyService.Point(max, 0)));
+
+        return superTempSystem;
     }
 }
