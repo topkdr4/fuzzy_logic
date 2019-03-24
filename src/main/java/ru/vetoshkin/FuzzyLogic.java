@@ -1,7 +1,5 @@
 package ru.vetoshkin;
-import ru.vetoshkin.input.InputData;
-import ru.vetoshkin.input.InputTurbidity;
-import ru.vetoshkin.input.InputWater;
+import ru.vetoshkin.input.*;
 import ru.vetoshkin.input.service.*;
 import ru.vetoshkin.output.OutputSpeed;
 import ru.vetoshkin.output.OutputWater;
@@ -71,8 +69,15 @@ public class FuzzyLogic {
     }
 
 
+    /**
+     * Большое количество микроорганизмов:
+     * IF Micro_ratio = Высокое THEN Cl_f_var = Положительное большое.
+     * */
     public void rule3(InputData inputData) {
+        Param micro = INPUT_MICRO_SERVICE.getVal(InputMicro.HIGH, inputData.getMicro_ratio());
 
+        SystemFunctions systemFunctions = OUTPUT_CHLOR_SERVICE.cutting(micro, micro.value);
+        System.out.printf("Правило #3. Центр тяжести: %.03f \n", systemFunctions.gravityCenter(30, 90));
     }
 
 
