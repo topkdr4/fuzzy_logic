@@ -14,7 +14,7 @@ import lombok.Getter;
 public class Param implements Comparable<Param> {
     protected final String count;
     protected final double value;
-    protected final Param state;
+    protected final transient Param state;
 
 
     public Param(String count, double value) {
@@ -34,5 +34,11 @@ public class Param implements Comparable<Param> {
     @Override
     public int compareTo(Param o) {
         return Double.compare(this.value, o.value);
+    }
+
+
+    @Override
+    public String toString() {
+        return count + ": " + value;
     }
 }

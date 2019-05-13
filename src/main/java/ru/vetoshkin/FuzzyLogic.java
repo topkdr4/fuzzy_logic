@@ -24,6 +24,7 @@ import static ru.vetoshkin.FuzzyService.NOT;
  * */
 public class FuzzyLogic {
     private static final NumberFormat formatter = new DecimalFormat("###.###");
+    private static final String DELIMITER = "---------------------------------";
 
     //*******************************************
 
@@ -46,14 +47,20 @@ public class FuzzyLogic {
      * Water_f_var = Положительное большое.
      */
     public void rule1(InputData inputData) {
+        System.out.println(DELIMITER);
         Param turbidity = INPUT_TURBIDITY_SERVICE.getVal(InputTurbidity.HIGH, inputData.getTurbidity());
         Param water = INPUT_WATER_SERVICE.getVal(InputWater.HIGH, inputData.getWater_f());
 
+        System.out.printf("Прозрачность:    %.03f \n", turbidity.value);
+        System.out.printf("Поток воды:      %.03f \n", water.value);
         Param temp = AND(turbidity, NOT(water));
+
+        System.out.printf("Результат:       %.03f \n", temp.value);
 
         SystemFunctions systemFunctions = OUTPUT_WATER_SERVICE.cutting(OutputWater.SUPER_POSITIVE, temp.value);
 
         System.out.printf("Правило #1. Центр тяжести: %.03f \n", systemFunctions.gravityCenter(30, 90));
+        System.out.println(DELIMITER);
     }
 
 
@@ -66,10 +73,17 @@ public class FuzzyLogic {
         Param turbidity = INPUT_TURBIDITY_SERVICE.getVal(InputTurbidity.HIGH, inputData.getTurbidity());
         Param water = INPUT_WATER_SERVICE.getVal(InputWater.HIGH, inputData.getWater_f());
 
+        System.out.printf("Прозрачность:    %.03f \n", turbidity.value);
+        System.out.printf("Поток воды:      %.03f \n", water.value);
+
         Param temp = AND(turbidity, water);
+
+        System.out.printf("Результат:       %.03f \n", temp.value);
+
         SystemFunctions systemFunctions = OUTPUT_SPEED_SERVICE.cutting(OutputSpeed.NEGATIVE, temp.value);
 
         System.out.printf("Правило #2. Центр тяжести: %.03f \n", systemFunctions.gravityCenter(-50, 10));
+        System.out.println(DELIMITER);
     }
 
 
@@ -80,8 +94,11 @@ public class FuzzyLogic {
     public void rule3(InputData inputData) {
         Param micro = INPUT_MICRO_SERVICE.getVal(InputMicro.HIGH, inputData.getMicro_ratio());
 
+        System.out.printf("Результат:       %.03f \n", micro.value);
+
         SystemFunctions systemFunctions = OUTPUT_CHLOR_SERVICE.cutting(OutputChlorine.SUPER_POSITIVE, micro.value);
         System.out.printf("Правило #3. Центр тяжести: %.03f \n", systemFunctions.gravityCenter(30, 90));
+        System.out.println(DELIMITER);
     }
 
 
@@ -96,11 +113,20 @@ public class FuzzyLogic {
         Param water = INPUT_WATER_SERVICE.getVal(InputWater.HIGH, inputData.getWater_f());
 
 
+        System.out.printf("Прозрачность:    %.03f \n", turbidity.value);
+        System.out.printf("Микроорганизмов: %.03f \n", micro.value);
+        System.out.printf("Скорость ленты:  %.03f \n", speed.value);
+        System.out.printf("Хлорин:          %.03f \n", chlorine.value);
+        System.out.printf("Поток воды:      %.03f \n", water.value);
+
+
         Param temp  = AND(turbidity, NOT(micro));
         Param temp1 = AND(NOT(speed), chlorine);
         Param temp2 = NOT(water);
 
         Param res   = AND(temp, AND(temp1, temp2));
+
+        System.out.printf("Результат:       %.03f \n", res.value);
 
         double speedFunctions = OUTPUT_SPEED_SERVICE.cutting(OutputSpeed.POSITIVE, res.value).gravityCenter(-10, 50);
         double chlorFunctions = OUTPUT_CHLOR_SERVICE.cutting(OutputChlorine.POSITIVE, res.value).gravityCenter(-10, 50);
@@ -113,6 +139,7 @@ public class FuzzyLogic {
         ).min().getAsDouble();
 
         System.out.printf("Правило #4. Центр тяжести: %.03f \n", min);
+        System.out.println(DELIMITER);
     }
 
 
@@ -125,10 +152,16 @@ public class FuzzyLogic {
         Param chlorine  = INPUT_CHLORINE_SERVICE.getVal(InputChlorine.HIGH, inputData.getCl_ratio());
         Param micro = INPUT_MICRO_SERVICE.getVal(InputMicro.HIGH, inputData.getMicro_ratio());
 
+        System.out.printf("Микроорганизмов: %.03f \n", micro.value);
+        System.out.printf("Хлорин:          %.03f \n", chlorine.value);
+
         Param temp = AND(chlorine, NOT(micro));
+
+        System.out.printf("Результат:       %.03f \n", temp.value);
 
         SystemFunctions systemFunctions = OUTPUT_CHLOR_SERVICE.cutting(OutputChlorine.NEGATIVE, temp.value);
         System.out.printf("Правило #5. Центр тяжести: %.03f \n", systemFunctions.gravityCenter(-50, 10));
+        System.out.println(DELIMITER);
     }
 
 
@@ -142,11 +175,18 @@ public class FuzzyLogic {
         Param chlorine  = INPUT_CHLORINE_SERVICE.getVal(InputChlorine.ACCEPTABLE, inputData.getCl_ratio());
         Param turbidity = INPUT_TURBIDITY_SERVICE.getVal(InputTurbidity.LOW, inputData.getTurbidity());
 
+        System.out.printf("Прозрачность:    %.03f \n", turbidity.value);
+        System.out.printf("Скорость ленты:  %.03f \n", speed.value);
+        System.out.printf("Хлорин:          %.03f \n", chlorine.value);
+
         Param temp = AND(speed, chlorine);
         temp = AND(temp, turbidity);
 
+        System.out.printf("Результат:       %.03f \n", temp.value);
+
         SystemFunctions systemFunctions = OUTPUT_WATER_SERVICE.cutting(OutputWater.NEGATIVE, temp.value);
         System.out.printf("Правило #6. Центр тяжести: %.03f \n", systemFunctions.gravityCenter(-50, 10));
+        System.out.println(DELIMITER);
     }
 
 
@@ -157,8 +197,11 @@ public class FuzzyLogic {
     public void rule7(InputData inputData) {
         Param micro = INPUT_MICRO_SERVICE.getVal(InputMicro.LOW, inputData.getMicro_ratio());
 
+        System.out.printf("Результат:       %.03f \n", micro.value);
+
         SystemFunctions systemFunctions = OUTPUT_CHLOR_SERVICE.cutting(OutputChlorine.NEGATIVE, micro.value);
         System.out.printf("Правило #7. Центр тяжести: %.03f \n", systemFunctions.gravityCenter(30, 90));
+        System.out.println(DELIMITER);
     }
 }
 
